@@ -1,4 +1,4 @@
-# Trabalho_Semestral_Banco_Dados
+# Trabalho Semestral Banco de Dados
 
 ## Trabalho de Banco de Dados:
 

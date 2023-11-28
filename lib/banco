@@ -1,0 +1,131 @@
+CREATE DATABASE BDt
+GO 
+USE BDT
+use master
+GO
+CREATE TABLE Dados_Bancarios(
+id_dados_bancarios  INT           NOT NULL,
+banco               VARCHAR(255)  NOT NULL,
+agencia             CHAR(10)      NOT NULL,
+numconta               CHAR(10)      NOT NULL,
+tipoconta          VARCHAR(15)   NOT NULL,
+nometitular        varchar(100)  not null,
+cnpj               varchar(11) not null,
+PRIMARY KEY(id_dados_bancarios)
+)
+INSERT INTO Dados_Bancarios VALUES  
+(10, 'Banco A', '1234-5', '6789-0', 'Corrente', 'João Silva', '12345678910'),
+(20, 'Banco B', '5678-9', '0123-4', 'Poupança', 'Maria Oliveira', '23456789012'),
+(30, 'Banco C', '9876-5', '4321-0', 'Corrente', 'Carlos Santos', '34567890123'),
+(40, 'Banco D', '5432-1', '8765-4', 'Poupança', 'Ana Souza', '45678901234'),
+(50, 'Banco E', '2109-8', '7654-3', 'Corrente', 'Pedro Rocha', '56789012345')
+ 
+CREATE TABLE Parceiro(
+codparc     INT NOT NULL,
+nome		 VARCHAR(50) NOT NULL,
+cnpj		CHAR(13) NOT NULL,
+social VARCHAR(100) NOT NULL,
+nomefant	 VARCHAR(100) NOT NULL,
+telefone			char(11) NOT NULL,
+email VARCHAR(50) NOT NULL,
+senha VARCHAR(30) NOT NULL,
+dataAbert date not null
+PRIMARY KEY (codparc)
+)
+INSERT INTO Parceiro  VALUES  
+(10, 'Empresa A', '1234567890123', 'Razao Social A', 'Fantasia A', '98765432101', 'empresaA@gmail.com', 'par123', '2023-01-15'),
+(20, 'Empresa B', '2345678901234', 'Razao Social B', 'Fantasia B', '87654321012', 'empresaB@gmail.com', 'parB', '2022-12-03'),
+(30, 'Empresa C', '3456789012345', 'Razao Social C', 'Fantasia C', '76543210923', 'empresaC@gmail.com', 'parC', '2023-02-28'),
+(40, 'Empresa D', '4567890123456', 'Razao Social D', 'Fantasia D', '65432109834', 'empresaD@gmail.com', 'parD', '2023-04-10'),
+(50, 'Empresa E', '5678901234567', 'Razao Social E', 'Fantasia E', '54321098745', 'empresaE@gmail.com', 'parE', '2023-03-05')
+ 
+CREATE TABLE Produto(
+id_produto INT NOT NULL,
+nome_produto VARCHAR(30) NOT NULL,
+descricao VARCHAR(255) NOT NULL,
+genero CHAR(10) NOT NULL,
+material VARCHAR(50) NOT NULL,
+composicao VARCHAR(50) NOT NULL,
+origem VARCHAR(40) NOT NULL,
+indicado VARCHAR(20) NOT NULL,
+marca VARCHAR(30)  NOT NULL,
+categoria VARCHAR(30) NOT NULL,
+tamanho INT NOT NULL,
+qtd_estoque INT NOT NULL,
+cor VARCHAR(20) NOT NULL,
+preco_venda DECIMAL(7,2) NOT NULL,
+codparc    int not null
+PRIMARY KEY (id_produto)
+foreign key (codparc) references Parceiro(codparc)
+)
+INSERT INTO Produto  VALUES  
+(1, 'Produto A', 'Descrição A', 'Feminino', 'Material A', 'Composição A', 'Nacional', 'Adulto', 'Marca A', 'Categoria A', 38, 100, 'Vermelho', 49.99, 10),
+(2, 'Produto B', 'Descrição B', 'Masculino', 'Material B', 'Composição B', 'Importado', 'Infantil', 'Marca B', 'Categoria B', 42, 50, 'Azul', 29.99, 20),
+(3, 'Produto C', 'Descrição C', 'Unissex', 'Material C', 'Composição C', 'Nacional', 'Infantil', 'Marca C', 'Categoria C', 36, 75, 'Verde', 39.99, 30),
+(4, 'Produto D', 'Descrição D', 'Feminino', 'Material D', 'Composição D', 'Importado', 'Adulto', 'Marca D', 'Categoria D', 40, 120, 'Preto', 59.99, 40),
+(5, 'Produto E', 'Descrição E', 'Masculino', 'Material E', 'Composição E', 'Nacional', 'Adulto', 'Marca E', 'Categoria E', 44, 80, 'Branco', 44.99, 50)
+ 
+CREATE TABLE Cliente(
+id_cliente INT NOT NULL,
+nome VARCHAR(60) NOT NULL,
+cpf CHAR(11) NOT NULL,
+data_nascimento date NOT NULL,
+email VARCHAR(50) NOT NULL,
+telefone CHAR(11) NOT NULL,
+senha VARCHAR(20) NOT NULL,
+PRIMARY KEY (id_cliente)
+)
+INSERT INTO Cliente VALUES
+(1, 'Cliente A', '12345678901', '1990-05-15', 'clienteA@gmail.com', '98765432101', 'cli123'),
+(2, 'Cliente B', '23456789012', '1985-08-20', 'clienteB@gmail.com', '87654321012', 'cliB'),
+(3, 'Cliente C', '34567890123', '1992-03-10', 'clienteC@gmail.com', '76543210923', 'cliC'),
+(4, 'Cliente D', '45678901234', '1988-11-25', 'clienteD@gmail.com', '65432109834', 'cliD'),
+(5, 'Cliente E', '56789012345', '1995-07-03', 'clienteE@gmail.com', '54321098745', 'cliE')
+ 
+CREATE TABLE ENDERECO(
+ID					INT NOT NULL,
+logradouro		   VARCHAR(50)   NOT NULL,
+cep                CHAR(08)      NOT NULL,
+bairro             VARCHAR(50)   NOT NULL,
+complemento        VARCHAR(50)   NOT NULL,
+numero             VARCHAR(20)   NOT NULL,
+cidade			varchar(20) ,
+estado			varchar(20) ,
+ponto_referencia   VARCHAR(30)  
+PRIMARY KEY(ID)
+
+)
+INSERT INTO ENDERECO VALUES
+(1, 'Rua A', '12345678', 'Centro', 'Apartamento 101', '123', 'Cidade A', 'Estado A', 'Ponto A'),
+(2, 'Avenida B', '23456789', 'Bairro B', 'Casa 202', '456', 'Cidade B', 'Estado B', 'Ponto B'),
+(3, 'Rua C', '34567890', 'Vila C', 'Sala 303', '789', 'Cidade C', 'Estado C', 'Ponto C'),
+(4, 'Avenida D', '45678901', 'Bairro D', 'Andar 404', '012', 'Cidade D', 'Estado D', 'Ponto D'),
+(5, 'Rua E', '56789012', 'Vila E', 'Casa 505', '345', 'Cidade E', 'Estado E', 'Ponto E'),
+
+(10, 'Rua A', '12345678', 'Centro', 'Apartamento 101', '123', null,null,null),
+(20, 'Avenida B', '23456789', 'Bairro B', 'Casa 202', '456', null,null,null),
+(30, 'Rua C', '34567890', 'Vila C', 'Sala 303', '789', null,null,null),
+(40, 'Avenida D', '45678901', 'Bairro D', 'Andar 404', '012', null,null,null),
+(50, 'Rua E', '56789012', 'Vila E', 'Casa 505', '345', null,null,null)
+
+create table Venda(
+codvenda int not null IDENTITY (1,1),
+codpod int not null,
+codcli int not null,
+primary key(codvenda,codpod,codcli),
+foreign key(codpod) references Produto(id_produto),
+foreign key(codcli)references Cliente(id_cliente)
+)
+INSERT INTO Venda VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5)
+ 
+select * from Produto
+select * from Cliente
+select * from Dados_Bancarios
+select * from Parceiro
+select * from ENDERECO
+select * from Venda
